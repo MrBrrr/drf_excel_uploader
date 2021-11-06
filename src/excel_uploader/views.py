@@ -1,6 +1,4 @@
 # Create your views here.
-import io
-
 import pandas as pd
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -17,15 +15,17 @@ class UploaderView(ViewSet):
     def create(self, request, format=None):
         file_uploaded = request.FILES.get("file_uploaded")
         column_names = request.data.get("column_names")
-        summary = self._summarize_chosen_columns(excel_bytes=file_uploaded, columns=column_names.split(","))
+        summary = self._summarize_chosen_columns(excel_file=file_uploaded, columns=column_names.split(","))
         response = {"filename": file_uploaded.name, "summary": summary}
         return Response(response)
 
-    def _summarize_chosen_columns(self, excel_bytes, columns):
-        content_bytes = io.BytesIO()
-        content_bytes.write(excel_bytes)
-        content_bytes.seek(0)
+    def _summarize_chosen_columns(self, excel_file, columns):
+        excel_file.seek(0)
+        content_df = pd.read_excel(excel_file.read())
+        content_df.columns = content_df.iloc[1]
+        content_df = content_df[2:].reset_index(drop=True)
 
-        content_pd = pd.DataFrame(content_bytes)
-
-        return self
+        return [
+            {"column": column, "avg": content_df[column].mean(), "sum": content_df[column].sum()}
+            for column in columns
+        ]
