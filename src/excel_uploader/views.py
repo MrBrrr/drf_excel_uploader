@@ -10,10 +10,10 @@ class UploaderView(ViewSet):
     serializer_class = ExcelSerializer
 
     def list(self, request):
-        return Response("list_view")
+        return Response("Nothing uploaded yet.")
 
     def create(self, request, format=None):
-        file_uploaded = request.FILES.get("file_uploaded")
+        file_uploaded = request.FILES.get("upload_file")
         column_names = request.data.get("column_names")
         summary = self._summarize_chosen_columns(excel_file=file_uploaded, columns=column_names.split(","))
         response = {"filename": file_uploaded.name, "summary": summary}

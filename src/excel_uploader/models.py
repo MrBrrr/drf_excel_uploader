@@ -5,7 +5,7 @@ from django.db import models
 
 class ExcelUploader(models.Model):
     column_names = models.CharField(max_length=500, default='')
-    file_uploaded = models.FileField()
+    upload_file = models.FileField()
 
     def __str__(self):
-        return self.file_uploaded.storage
+        return self.upload_file.storage
