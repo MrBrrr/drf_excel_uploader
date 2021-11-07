@@ -10,8 +10,10 @@ To fully enjoy this application install all the requirements from: __src\require
 ___________________________
 ### Using the application with _HTML Form_
 
-1. Open the terminal and run the command: 
+1. Open the terminal and run the commands: 
 ```shell 
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
 ```
 2. Copy-paste the link `http://127.0.0.1:8000` to the web browser and navigate to __upload__ section:
