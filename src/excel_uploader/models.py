@@ -8,4 +8,4 @@ class ExcelUploader(models.Model):
     upload_file = models.FileField()
 
     def __str__(self):
-        return self.upload_file.storage
+        return self.upload_file.name

@@ -33,8 +33,8 @@ will evaluate:
     "summary": [
         {
             "column": "THIS IS THE  PRICE NEW PRICE IN US DOLLARS",
-            "avg": 57.01145933130964,
-            "sum": 38311.70067064008
+            "avg": 57.07384943631512,
+            "sum": 38410.70067064008
         }
     ]
 }
